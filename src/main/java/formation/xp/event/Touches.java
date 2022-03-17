@@ -1,4 +1,4 @@
-package fr.event;
+package formation.xp.event;
 
 import java.awt.event.KeyEvent;
 

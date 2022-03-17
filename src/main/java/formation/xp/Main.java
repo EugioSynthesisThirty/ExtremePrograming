@@ -1,13 +1,13 @@
-package fr;
-import fr.fenetre.Fenetre;
-import fr.fenetre.Panneau;
-import fr.game.Tetris;
+package formation.xp;
+import formation.xp.fenetre.Fenetre;
+import formation.xp.fenetre.Panneau;
+import formation.xp.game.Tetris;
 
 public class Main
 {
 	public static void main(String[] args)
 	{
-		Tetris tetris = new Tetris();
+		Tetris tetris = new Tetris(0, 0);
 		
 		Panneau panneau = new Panneau(tetris);
 		Fenetre fenetre = new Fenetre(panneau);
@@ -34,7 +34,7 @@ public class Main
 				lastTemps = tempsActuel;
 				
 				panneau.repaint();
-				//tetris.update();
+				tetris.update();
 			}
 		}
 	}

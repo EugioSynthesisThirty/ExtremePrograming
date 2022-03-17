@@ -1,4 +1,4 @@
-package fr.fenetre;
+package formation.xp.fenetre;
 
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -9,8 +9,8 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
-import fr.Main;
-import fr.event.Clavier;
+import formation.xp.Main;
+import formation.xp.event.Clavier;
 
 public class Fenetre extends JFrame
 {

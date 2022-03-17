@@ -1,4 +1,4 @@
-package fr.fenetre;
+package formation.xp.fenetre;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -7,7 +7,7 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
-import fr.game.Tetris;
+import formation.xp.game.Tetris;
 
 public class Panneau extends JPanel
 {
@@ -50,7 +50,7 @@ public class Panneau extends JPanel
 
 		if (this.tetris != null)
 		{
-			
+			((Graphics2D) g).drawRect(tetris.x, tetris.y, 100, 100);
 		}
 	}
 }
