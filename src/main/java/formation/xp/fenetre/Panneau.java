@@ -50,7 +50,7 @@ public class Panneau extends JPanel
 
 		if (this.tetris != null)
 		{
-			((Graphics2D) g).drawRect(tetris.x, tetris.y, 100, 100);
+			((Graphics2D) g).drawRect(tetris.x, tetris.y, 100, height);
 		}
 	}
 }

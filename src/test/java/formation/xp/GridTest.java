@@ -13,6 +13,12 @@ public class GridTest
 	{
 		Grid grid = new Grid(5, 4);
 		
-		assertFalse(grid.getCase(4, 3).filled);
+		for (int y = 0; y < grid.height; y++)
+		{
+			for (int x = 0; x < grid.width; x++)
+			{
+				assertFalse(grid.getCase(x, y).filled);
+			}
+		}
 	}
 }
