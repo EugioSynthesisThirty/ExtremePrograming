@@ -7,7 +7,7 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		Tetris tetris = new Tetris(0, 0);
+		Tetris tetris = new Tetris();
 		
 		Panneau panneau = new Panneau(tetris);
 		Fenetre fenetre = new Fenetre(panneau);
