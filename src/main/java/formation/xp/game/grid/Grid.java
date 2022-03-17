@@ -50,12 +50,19 @@ public class Grid {
 	}
 
 	public void update(ArrayList<Piece> pieces) {
-		this.clear();
 		for (Piece piece : pieces) {
 			for (Coord coord : piece.getAbsoluteCoords()) {
 				if (coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height) {
 					this.setCase(coord, new CaseGrid(true, piece.color));
 				}
+			}
+		}
+	}
+
+	public void update(Piece piece) {
+		for (Coord coord : piece.getAbsoluteCoords()) {
+			if (coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height) {
+				this.setCase(coord, new CaseGrid(true, piece.color));
 			}
 		}
 	}
