@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Piece {
     public ArrayList<Coord> coords;
     public Coord position;
+    public ColorPiece color;
 
     public Piece(int x, int y) {
         this.position = new Coord(x, y);
@@ -14,6 +15,9 @@ public class Piece {
         this.coords.add(new Coord(0, 0));
         this.coords.add(new Coord(1, 0));
         this.coords.add(new Coord(0, 1));
+        
+        int colorIndex = (int) (Math.random() * ColorPiece.values().length);
+        color = ColorPiece.values()[colorIndex];
     }
 
     public ArrayList<Coord> getAbsoluteCoords() {

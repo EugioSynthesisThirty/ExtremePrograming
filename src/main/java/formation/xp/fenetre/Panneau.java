@@ -67,7 +67,7 @@ public class Panneau extends JPanel
 					
 					if (c.filled)
 					{
-						g.setColor(new Color(0, 0, 0));
+						g.setColor(c.color.color);
 					}
 					else
 					{
