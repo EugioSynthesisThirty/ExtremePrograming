@@ -51,12 +51,34 @@ public class Grid {
 
 	public void update(ArrayList<Piece> pieces) {
 		for (Piece piece : pieces) {
-			for (Coord coord : piece.getAbsoluteCoords()) {
-				if (coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height) {
-					this.setCase(coord, new CaseGrid(true, piece.color));
-				}
+			this.update(piece);
+		}
+	}
+
+	public boolean isInGrid(Coord coord) {
+		return coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height;
+	}
+
+	public void update(Piece piece) {
+		for (Coord coord : piece.getAbsoluteCoords()) {
+			if (this.isInGrid(coord)) {
+				this.setCase(coord, new CaseGrid(true, piece.color));
 			}
 		}
+	}
+
+	public boolean checkCollision(Piece piece) {
+		for (Coord coord : piece.coords) {
+			if (!this.isInGrid(coord)) {
+				return true;
+			}
+
+			CaseGrid caseGrid = this.getCase(coord);
+			if (caseGrid.filled) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void update(Piece piece) {

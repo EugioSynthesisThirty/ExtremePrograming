@@ -2,7 +2,7 @@ package formation.xp.game.piece;
 
 import java.util.ArrayList;
 
-public class Piece {
+public class Piece implements Cloneable {
     public ArrayList<Coord> coords;
     public Coord position;
     public ColorPiece color;
@@ -15,7 +15,7 @@ public class Piece {
         this.coords.add(new Coord(0, 0));
         this.coords.add(new Coord(1, 0));
         this.coords.add(new Coord(0, 1));
-        
+
         int colorIndex = (int) (Math.random() * ColorPiece.values().length);
         color = ColorPiece.values()[colorIndex];
     }
@@ -34,5 +34,10 @@ public class Piece {
 
     public void MoveRight() {
         this.position.x++;
+    }
+
+    @Override
+    public Piece clone() {
+        return new Piece(this.position.x, this.position.y);
     }
 }
