@@ -27,4 +27,12 @@ public class Piece {
         }
         return absoluteCoords;
     }
+
+    public void MoveLeft() {
+        this.position.x--;
+    }
+
+    public void MoveRight() {
+        this.position.x++;
+    }
 }
