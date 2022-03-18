@@ -1,95 +1,53 @@
-# ExtremePrograming
+# tp1-user-stories
 
-## Git
+Membres du groupe : DHIMOÏLA Gabriel, JOLY Mathias et LASTRE Sébastien
 
-* Forkez le projet sur votre github
-* Clonez le projet : `git clone <target-url>`
+## Projet : Tetris
 
-## Installation
+### User stories
 
-### Eclipse
+| ID | En tant que... | Je veux...                                                                    | Pour...                               | Valeur métier | Durée  | Ordre | Itération |
+|----|----------------|-------------------------------------------------------------------------------|---------------------------------------|---------------|--------|-------|-----------|
+| 1  | Joueur         | Voir mon score                                                                | Voir si je suis le meilleur           | 60            | 25 min | 7     | 1         |
+| 2  | Joueur         | Voir la prochaine pièce                                                       | Anticiper mes actions                 | 90            | 25 min | 6     | 1         |
+| 3  | Joueur         | Déplacer des pièces                                                           | Organiser mon jeu                     | 100           | 25 min | 2     | 1         |
+| 4  | Joueur         | Tourner des pièces                                                            | Organiser mon jeu                     | 100           | 25 min | 3     | 1         |
+| 5  | Joueur         | Pouvoir déplacer une pièce avec un délai lorsqu'elle arrive en bout de course | Organiser mon jeu                     | 50            | 0 min  | 4     | 1         |
+| 6  | Joueur         | Pouvoir descendre rapidement une pièce                                        | Ne pas perdre mon temps précieux      | 20            | 5 min  | 5     | 1         |
+| 7  | Joueur         | Pouvoir faire des combos                                                      | Récompenser la prise de risque        | 50            | 15 min | 8     | 1         |
+| 8  | Joueur         | Pouvoir écouter la musique Tetris                                             | Avoir une meilleur expérience         | 40            | 1h     | 10    | 2         |
+| 9  | Joueur         | Avoir des pièces de couleurs différentes                                      | Pouvoir les distinguer facilement     | 70            | 5 min  | 1     | 1         |
+| 10 | Joueur         | Avoir un gameover quand je perds                                              | Choisir si je veux refaire une partie | 45            | 1h     | 9     | 2         |
+| 11 | Joueur         | Enregistrer mon score dans un classement                                      | Me comparer aux autres joueurs        | 60            | 2h     | 11    | 2         |
+| 12 | Joueur         | Jouer en multijoueur                                                          | Jouer avec amis                       | 40            | 5h     | 15    | 5         |
+| 13 | Joueur         | Jouer sur plusieurs plateformes                                               | Jouer sur tous mes OS                 | 20            | 1h     | 16    | 4         |
+| 14 | Joueur         | Choisir des interfaces différentes                                            | Personnaliser mon jeu                 | 40            | 2h     | 13    | 3         |
+| 15 | Joueur         | Choisir la taille de la grille                                                | Varier mon expérience                 | 10            | 30 min | 14    | 4         |
+| 16 | Joueur         | Reconfigurer les touches                                                      | Personnaliser mon jeu                 | 50            | 1h     | 12    | 3         |
 
-Vous avez téléchargé la version portable d'Eclipse, vous pouvez donc le lancer en allant directement dans le dossier extrait.
+### Critères d'acceptation
 
-Pour importer le projet :
-```
-File > Open Projects from File System... > Directory...
-```
-## Pratique (POKER)
+| REF | Etant donné...              | Quand...                                                                         | Alors...                                         |
+|-----|-----------------------------|----------------------------------------------------------------------------------|--------------------------------------------------|
+| 3   | une pièce qui tombe         | j'appuie sur une touche directionnelle                                           | la pièce dans la direction demandée              |
+| 4   | une pièce qui tombe         | j'appuie sur une touche rotationnelle                                            | la pièce tourne dans le sens demandé             |
+| 2   | une pièce en bout de course | je ne fais rien                                                                  | la prochaine pièce annoncée est mise à jour      |
+| 1   | une pièce en bout de course | elle complète une ligne                                                          | mon score augmente                               |
+| 7   | une pièce en bout de course | elle complète plusieurs ligne                                                    | mon score augmente avec la taille du combo       |
+| 10  | une pièce en bout de course | elle dépasse de la grille                                                        | la partie est terminée                           |
+| 8   | un bouton pour le son       | j'appuie dessus                                                                  | la musique commence / s'arrête                   |
+| 6   | une pièce qui tombe         | j'appuie sur la touche directionnelle du bas                                     | la pièce descend rapidement                      |
+| 12  | une partie multijoueur      | l'un des joueurs perd                                                            | la partie se termine                             |
+| 11  | une partie terminée         | mon score fait partie des X meilleurs                                            | le classement est mis à jour                     |
+| 5   | une pièce en bout de course | j'appuie sur une touche directionnelle ou rotationnelle dans une période de 0.5s | la pièce bouge ou tourne dans la bonne direction |
+| 9   | deux pièces                 | elles ont la même forme                                                          | elles ont la même couleur                        |
+| 9   | deux pièces                 | elles ont des formes différentes                                                 | elles ont des couleurs différentes               |
+| 3,4 | une pièce                   | la déplacer ou la tourner lui ferait faire un mouvement interdit                 | la pièce ne peut pas réaliser ce mouvement       |
+| 14  | un menu de configuration    | je change l'interface de jeu                                                     | la nouvelle interface est utilisée dans le jeu   |
+| 15  | un menu de configuration    | je change la taille de la grille                                                 | les nouvelles dimensions sont utilisées          |
+| 16  | un menu de configuration    | lorsque j'attribue à une fonctionnalité une nouvelle touche                      | seul la nouvelle touche réalise l'action         |
 
-### Backlog
+### Itérations
 
-Id | En tant que... | Je veux... | Afin de... | Valeur | O(n) (h)
---- | --- | --- | --- | --- | ---
-1 | Joueur | initialiser une partie | commencer à jouer | 100 | 2
-2 | Joueur | choisir le nombre de joueurs | initialiser la partie | 100 | 1/2
-3 | Joueur | choisir le nom des joueurs | initialiser la partie | 50 | 1
-4 | Joueur | recevoir 2 cartes en début de tour | constituer ma main | 100 | 1
-5 | Joueur | terminer ma partie au bout d'un certain nombre de tours | limiter le temps de jeux | 50 | 1/2
-6 | Joueur | découvrir les cartes sur la table | connaître ma combinaison | 70 | 1/2
-7 | Joueur | être exclu si je n'ai plus d'argent | réduire le nombre de joueurs | 80 | 1/2
-8 | Joueur | miser | augmenter les gains du tour | 80 | 1/2
-9 | Joueur | suivre (miser le minimum pour continuer) | augmenter la somme en jeu | 80 | 1/2
-10 | Joueur | faire tapis (miser tout mon argent) | augmenter la somme en jeu | 80 | 1/2
-11 | Joueur | relancer (surenchérir) | augmenter la somme en jeu | 80 | 1/2
-12 | Joueur | passer | voir les autres mises | 80 | 1/2
-13 | Joueur | voir ma mise actuelle | décider de mon annonce | 80 | 1/2
-14 | Joueur | jouer après le joueur à ma droite | effectuer une action | 70 | 1
-15 | Joueur | voir seulement mes cartes | décider de mon annonce | 100 | 1
-16 | Joueur | voir la somme qui me reste | décider des mises | 80 | 1/2
-17 | Joueur / Spectateur | savoir quel joueur a gagné le tour | savoir la répartition des gains | 70 | 2
-18 | Joueur / Spectateur | voir la somme en jeu | connaître l'objectif | 50 | 1/2
-19 | Spectateur | découvrir les cartes sur la table | suivre le déroulement de la partie | 20 | 1/2
-20 | Spectateur | voir l'argent de tous les joueurs | suivre le déroulement de la partie | 20 | 1/2
-21 | Spectateur | voir les cartes de tous les joueurs | suivre le déroulement de la partie | 20 | 1/2
-22 | Croupier | le joueur à ma gauche mise la petite blind | initialiser le tour | 90 | 1/2
-23 | Croupier | le deuxième joueur à ma gauche mise la grande blind | initialiser le tour | 90 | 1/2
-24 | Croupier | le troisième joueur à ma gauche commence le tour | initialiser le tour | 90 | 1/2
-25 | Croupier | le joueur à ma gauche soit le prochain croupier | initialiser le prochain tour | 90 | 1/2
-
-### Sprint 1
-
-User story | Temps (h)
---- | ---
-1 | 2
-4 | 1
-8 | 1/2
-9 | 1/2
-10 | 1/2
-11 | 1/2
-12 | 1/2
-13 | 1/2
-15 | 1
-**Total** | **7**
-
-### Sprint 2
-
-User story | Temps (h)
---- | ---
-2 | 1/2
-7 | 1/2
-14 | 1
-16 | 1/2
-17 | 2
-18 | 1/2
-22 | 1/2
-23 | 1/2
-24 | 1/2
-25 | 1/2
-**Total** | **7**
-
-
-## Aide
-
-### Cheat sheets
-
-* [Java](https://introcs.cs.princeton.edu/java/11cheatsheet/ "Java Programing Cheatsheet")
-* [Git](https://www.git-tower.com/blog/posts/git-cheat-sheet "Git Tower")
-* [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet "Markdown Cheat Sheet by Adam Pritchard")
-
-### Docs
-
-* [Debian](https://www.debian.org/doc/manuals/refcard/refcard "Debian Doc")
-* [Git](https://git-scm.com/documentation "Git SCM doc")
-* [Javadoc](https://docs.oracle.com/javase/8/docs/api/ "Java 8 Doc")
-* [JUnit](http://junit.org/junit4/javadoc/latest/ "JUnit Doc")
+Première itération : 1, 2, 3, 4, 6, 7, 9, 10, 11 
+Deuxième itération : 5, 8, 12, 13, 14, 15, 16
