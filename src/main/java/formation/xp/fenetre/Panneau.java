@@ -23,6 +23,7 @@ public class Panneau extends JPanel
 	public Panneau()
 	{
 		super();
+		this.tetris = null;
 	}
 
 	public Panneau(Tetris tetris)
@@ -57,6 +58,9 @@ public class Panneau extends JPanel
 		int offset_y = (height - lengthCase * tetris.grid.height) / 2;
 		int margin = 2;
 
+		g.setColor(new Color(196, 196, 196));
+		g.fillRect(0, 0, width, height);
+		
 		if (this.tetris != null)
 		{
 			for (int x = 0; x < tetris.grid.width; x++)
@@ -65,7 +69,11 @@ public class Panneau extends JPanel
 				{
 					CaseGrid c = tetris.grid.getCase(x, y);
 					
-					if (c.filled)
+					if (c.fixed)
+					{
+						g.setColor(new Color(0, 0, 0));
+					}
+					else if (c.filled)
 					{
 						g.setColor(c.color.color);
 					}

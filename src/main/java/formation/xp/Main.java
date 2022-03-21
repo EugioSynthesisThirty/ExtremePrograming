@@ -8,9 +8,10 @@ public class Main
 	public static void main(String[] args)
 	{
 		Tetris tetris = new Tetris();
-		
 		Panneau panneau = new Panneau(tetris);
 		Fenetre fenetre = new Fenetre(panneau);
+		
+		tetris.setClavier(fenetre.getClavier());
 		
 		while (!fenetre.isGenere());
 		
@@ -32,15 +33,15 @@ public class Main
 			if (tempsActuel - lastTemps >= intervalle)
 			{
 				lastTemps = tempsActuel;
-				
-				panneau.repaint();
+
 				tetris.update();
+				panneau.repaint();
 			}
 		}
 	}
 	
 	public static void quit()
 	{
-
+		
 	}
 }

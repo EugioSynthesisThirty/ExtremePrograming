@@ -51,7 +51,7 @@ public class Grid {
 
 	public void update(ArrayList<Piece> pieces) {
 		for (Piece piece : pieces) {
-			this.update(piece);
+			this.update(piece, true);
 		}
 	}
 
@@ -59,33 +59,25 @@ public class Grid {
 		return coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height;
 	}
 
-	public void update(Piece piece) {
+	public void update(Piece piece, boolean fixed) {
 		for (Coord coord : piece.getAbsoluteCoords()) {
 			if (this.isInGrid(coord)) {
-				this.setCase(coord, new CaseGrid(true, piece.color));
+				this.setCase(coord, new CaseGrid(true, fixed, piece.color));
 			}
 		}
 	}
 
 	public boolean checkCollision(Piece piece) {
-		for (Coord coord : piece.coords) {
+		for (Coord coord : piece.getAbsoluteCoords()) {
 			if (!this.isInGrid(coord)) {
 				return true;
 			}
 
 			CaseGrid caseGrid = this.getCase(coord);
-			if (caseGrid.filled) {
+			if (caseGrid.filled && caseGrid.fixed) {
 				return true;
 			}
 		}
 		return false;
-	}
-
-	public void update(Piece piece) {
-		for (Coord coord : piece.getAbsoluteCoords()) {
-			if (coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height) {
-				this.setCase(coord, new CaseGrid(true, piece.color));
-			}
-		}
 	}
 }

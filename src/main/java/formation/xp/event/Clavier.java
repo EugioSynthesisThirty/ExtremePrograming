@@ -25,7 +25,7 @@ public class Clavier implements KeyListener
 
 	public void keyTyped(KeyEvent k)
 	{
-
+		
 	}
 
 	public void keyPressed(KeyEvent k)
