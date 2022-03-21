@@ -1,6 +1,5 @@
 package formation.xp.event;
 
-import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -8,19 +7,17 @@ public class Clavier implements KeyListener
 {
 	private boolean[] pressed;
 	private boolean[] typed;
+	private double[] lastTimeTyped;
+	private double durationNoRepeat;
+	private double durationRepeat;
 
 	public Clavier()
 	{
 		pressed = new boolean[KeyEvent.KEY_LAST];
 		typed = new boolean[KeyEvent.KEY_LAST];
-	}
-
-	public Clavier(final Component c)
-	{
-		pressed = new boolean[KeyEvent.KEY_LAST];
-		typed = new boolean[KeyEvent.KEY_LAST];
-		c.addKeyListener(this);
-		c.requestFocusInWindow();
+		lastTimeTyped = new double[KeyEvent.KEY_LAST];
+		durationNoRepeat = 500;
+		durationRepeat = 70;
 	}
 
 	public void keyTyped(final KeyEvent k)
@@ -34,7 +31,7 @@ public class Clavier implements KeyListener
 		{
 			if (!pressed[k.getKeyCode()])
 				typed[k.getKeyCode()] = true;
-
+			
 			pressed[k.getKeyCode()] = true;
 		}
 		catch (Exception e)
@@ -67,52 +64,22 @@ public class Clavier implements KeyListener
 		this.pressed[k] = pressed;
 	}
 
-	public boolean isTyped(int k, boolean reset)
+	public boolean isTyped(int k, double time)
 	{
-		boolean retour = typed[k];
-		try
+		if (typed[k])
 		{
-			if (reset)
-				typed[k] = false;
+			lastTimeTyped[k] = time - durationRepeat + durationNoRepeat;
+			typed[k] = false;
+			return true;
 		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			System.exit(1);
-		}
-
-		return retour;
-	}
-
-	public void setTyped(int k, boolean typed)
-	{
-		this.typed[k] = typed;
-	}
-
-	public void reset()
-	{
-		for (int i = 0; i < KeyEvent.KEY_LAST; i++)
-		{
-			pressed[i] = false;
-			typed[i] = false;
-		}
-	}
-
-	public void reset(int k)
-	{
-		pressed[k] = false;
-		typed[k] = false;
-	}
-
-	public void reset(final Touches touches)
-	{
-		pressed[touches.getHaut()] = false;
-		typed[touches.getHaut()] = false;
-		pressed[touches.getGauche()] = false;
-		typed[touches.getGauche()] = false;
-		pressed[touches.getBas()] = false;
-		typed[touches.getBas()] = false;
-		pressed[touches.getDroite()] = false;
-		typed[touches.getDroite()] = false;
+		
+		if (!isPressed(k))
+			return false;
+		
+		if (time - lastTimeTyped[k] < durationRepeat)
+			return false;
+		
+		lastTimeTyped[k] = time;
+		return true;
 	}
 }

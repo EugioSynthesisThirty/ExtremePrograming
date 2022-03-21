@@ -35,7 +35,7 @@ public class Main
 			{
 				lastTemps = tempsActuel;
 
-				tetris.update();
+				tetris.update(tempsActuel);
 				panneau.repaint();
 			}
 		}

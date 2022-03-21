@@ -49,6 +49,10 @@ public class Piece implements Cloneable {
         this.position.x++;
     }
     
+    public void MoveDown() {
+    	this.position.y++;
+    }
+    
     public void Rotate() {
     	this.rotation = (this.rotation + 1) % 4;
     }

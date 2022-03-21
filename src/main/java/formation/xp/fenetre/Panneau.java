@@ -69,11 +69,7 @@ public class Panneau extends JPanel
 				{
 					CaseGrid c = tetris.grid.getCase(x, y);
 					
-					if (c.fixed)
-					{
-						g.setColor(new Color(0, 0, 0));
-					}
-					else if (c.filled)
+					if (c.filled)
 					{
 						g.setColor(c.color.color);
 					}
