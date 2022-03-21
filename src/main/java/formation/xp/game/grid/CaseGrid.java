@@ -15,7 +15,7 @@ public class CaseGrid {
 
 	public CaseGrid(boolean filled, boolean fixed, ColorPiece color) {
 		this.filled = filled;
-		fixed = false;
+		this.fixed = fixed;
 		this.color = color;
 	}
 }

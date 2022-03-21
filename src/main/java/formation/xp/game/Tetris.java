@@ -8,13 +8,13 @@ import formation.xp.game.grid.Grid;
 import formation.xp.game.piece.Piece;
 
 public class Tetris {
-	private Clavier clavier;
+    private Clavier clavier;
     public Grid grid;
     private Piece currentPiece;
     private ArrayList<Piece> pieces;
 
     public Tetris() {
-    	clavier = null;
+        clavier = null;
         this.grid = new Grid(10, 21);
         pieces = new ArrayList<Piece>();
         currentPiece = new Piece(5, 5);
@@ -25,25 +25,22 @@ public class Tetris {
     }
 
     public void update() {
-    	if (clavier != null)
-    	{
-        	if (clavier.isTyped(KeyEvent.VK_LEFT, true))
-        	{
-        		MoveLeft();
-        	}
+        if (clavier != null) {
+            if (clavier.isTyped(KeyEvent.VK_LEFT, true)) {
+                MoveLeft();
+            }
 
-        	if (clavier.isTyped(KeyEvent.VK_RIGHT, true))
-        	{
-        		MoveRight();
-        	}
-    	}
+            if (clavier.isTyped(KeyEvent.VK_RIGHT, true)) {
+                MoveRight();
+            }
+        }
 
         grid.clear();
         grid.update(pieces);
         grid.update(currentPiece, false);
     }
 
-    public void MoveLeft() {
+    private void MoveLeft() {
         Piece tmpPiece = currentPiece.clone();
         tmpPiece.MoveLeft();
         if (!grid.checkCollision(tmpPiece)) {
@@ -51,16 +48,15 @@ public class Tetris {
         }
     }
 
-    public void MoveRight() {
+    private void MoveRight() {
         Piece tmpPiece = currentPiece.clone();
         tmpPiece.MoveRight();
         if (!grid.checkCollision(tmpPiece)) {
             currentPiece = tmpPiece;
         }
     }
-    
-    public void setClavier(Clavier clavier)
-    {
-    	this.clavier = clavier;
+
+    public void setClavier(Clavier clavier) {
+        this.clavier = clavier;
     }
 }

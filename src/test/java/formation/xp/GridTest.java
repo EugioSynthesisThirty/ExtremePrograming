@@ -2,6 +2,7 @@ package formation.xp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -26,10 +27,7 @@ public class GridTest {
 	@Test
 	public void addOnePieceTest() {
 		Grid grid = new Grid(5, 4);
-		ArrayList<Piece> pieces = new ArrayList<Piece>();
-		pieces.add(new Piece(1, 1));
-
-		grid.update(pieces);
+		grid.update(new Piece(1, 1), false);
 
 		ArrayList<Coord> parts = new ArrayList<Coord>();
 		parts.add(new Coord(0, 1));
@@ -48,5 +46,31 @@ public class GridTest {
 				assertEquals(found, grid.getCase(x, y).filled);
 			}
 		}
+	}
+
+	@Test
+	public void noCollisionTest() {
+		Grid grid = new Grid(5, 4);
+		Piece piece = new Piece(1, 1);
+
+		assertFalse(grid.checkCollision(piece));
+	}
+
+	@Test
+	public void outOfBoundsTest() {
+		Grid grid = new Grid(5, 4);
+		Piece piece = new Piece(0, 1);
+
+		assertTrue(grid.checkCollision(piece));
+	}
+
+	@Test
+	public void collisionWithFixedTest() {
+		Grid grid = new Grid(5, 4);
+		Piece fixedPiece = new Piece(1, 1);
+		Piece piece = new Piece(3, 1);
+
+		grid.update(fixedPiece, true);
+		assertTrue(grid.checkCollision(piece));
 	}
 }
