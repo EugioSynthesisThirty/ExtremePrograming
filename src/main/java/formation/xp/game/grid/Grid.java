@@ -30,15 +30,15 @@ public class Grid {
 		return cases.get(y).get(x);
 	}
 
-	public CaseGrid getCase(Coord coord) {
+	public CaseGrid getCase(final Coord coord) {
 		return cases.get(coord.y).get(coord.x);
 	}
 
-	public void setCase(int x, int y, CaseGrid caseGrid) {
+	public void setCase(int x, int y, final CaseGrid caseGrid) {
 		cases.get(y).set(x, caseGrid);
 	}
 
-	public void setCase(Coord coord, CaseGrid caseGrid) {
+	public void setCase(final Coord coord, final CaseGrid caseGrid) {
 		cases.get(coord.y).set(coord.x, caseGrid);
 	}
 
@@ -49,17 +49,17 @@ public class Grid {
 		}
 	}
 
-	public void update(ArrayList<Piece> pieces) {
+	public void update(final ArrayList<Piece> pieces) {
 		for (Piece piece : pieces) {
 			this.update(piece, true);
 		}
 	}
 
-	public boolean isInGrid(Coord coord) {
+	public boolean isInGrid(final Coord coord) {
 		return coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height;
 	}
 
-	public void update(Piece piece, boolean fixed) {
+	public void update(final Piece piece, boolean fixed) {
 		for (Coord coord : piece.getAbsoluteCoords()) {
 			if (this.isInGrid(coord)) {
 				this.setCase(coord, new CaseGrid(true, fixed, piece.color));
@@ -67,7 +67,7 @@ public class Grid {
 		}
 	}
 
-	public boolean checkCollision(Piece piece) {
+	public boolean checkCollision(final Piece piece) {
 		for (Coord coord : piece.getAbsoluteCoords()) {
 			if (!this.isInGrid(coord)) {
 				return true;

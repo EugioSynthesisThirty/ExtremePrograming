@@ -3,30 +3,40 @@ package formation.xp.game.piece;
 import java.util.ArrayList;
 
 public class Piece implements Cloneable {
-    public Coord position;
+    private Coord position;
+    private int rotation;
     public ColorPiece color;
-    public TypePiece typePiece;
+    private TypePiece typePiece;
 
     public Piece(int x, int y) {
         this.position = new Coord(x, y);
+        this.rotation = 0;
 
         int colorIndex = (int) (Math.random() * ColorPiece.values().length);
         color = ColorPiece.values()[colorIndex];
 
         int pieceIndex = (int) (Math.random() * TypePiece.values().length);
         this.typePiece = TypePiece.values()[pieceIndex];
+        System.out.println("piece : " + typePiece.toString());
     }
 
     private Piece(final Piece piece) {
         this.position = new Coord(piece.position.x, piece.position.y);
+        this.rotation = piece.rotation;
         this.color = piece.color;
         this.typePiece = piece.typePiece;
     }
 
     public ArrayList<Coord> getAbsoluteCoords() {
         ArrayList<Coord> absoluteCoords = new ArrayList<Coord>();
-        for (Coord coord : this.typePiece.coords) {
-            absoluteCoords.add(new Coord(coord.x + position.x, coord.y + position.y));
+        for (final CoordFloat coord : this.typePiece.coords) {
+        	CoordFloat cf = new CoordFloat(coord.x, coord.y);
+        	
+        	for (int i = 0; i < rotation; i++)
+        		cf = new CoordFloat(cf.y, -cf.x);
+        	
+        	Coord c = new Coord(cf);
+            absoluteCoords.add(new Coord(c.x + position.x, c.y + position.y));
         }
         return absoluteCoords;
     }
@@ -37,6 +47,10 @@ public class Piece implements Cloneable {
 
     public void MoveRight() {
         this.position.x++;
+    }
+    
+    public void Rotate() {
+    	this.rotation = (this.rotation + 1) % 4;
     }
 
     @Override

@@ -8,6 +8,11 @@ public class Coord {
         this.x = x;
         this.y = y;
     }
+
+    public Coord(final CoordFloat c) {
+        this.x = (int) Math.ceil(c.x);
+        this.y = (int) Math.ceil(c.y);
+    }
     
     public String toString()
     {

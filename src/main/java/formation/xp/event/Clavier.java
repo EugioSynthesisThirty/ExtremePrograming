@@ -15,7 +15,7 @@ public class Clavier implements KeyListener
 		typed = new boolean[KeyEvent.KEY_LAST];
 	}
 
-	public Clavier(Component c)
+	public Clavier(final Component c)
 	{
 		pressed = new boolean[KeyEvent.KEY_LAST];
 		typed = new boolean[KeyEvent.KEY_LAST];
@@ -23,12 +23,12 @@ public class Clavier implements KeyListener
 		c.requestFocusInWindow();
 	}
 
-	public void keyTyped(KeyEvent k)
+	public void keyTyped(final KeyEvent k)
 	{
 		
 	}
 
-	public void keyPressed(KeyEvent k)
+	public void keyPressed(final KeyEvent k)
 	{
 		try
 		{
@@ -44,7 +44,7 @@ public class Clavier implements KeyListener
 		}
 	}
 
-	public void keyReleased(KeyEvent k)
+	public void keyReleased(final KeyEvent k)
 	{
 		try
 		{
@@ -104,7 +104,7 @@ public class Clavier implements KeyListener
 		typed[k] = false;
 	}
 
-	public void reset(Touches touches)
+	public void reset(final Touches touches)
 	{
 		pressed[touches.getHaut()] = false;
 		typed[touches.getHaut()] = false;

@@ -33,6 +33,10 @@ public class Tetris {
             if (clavier.isTyped(KeyEvent.VK_RIGHT, true)) {
                 MoveRight();
             }
+
+            if (clavier.isTyped(KeyEvent.VK_UP, true)) {
+                Rotate();
+            }
         }
 
         grid.clear();
@@ -51,6 +55,14 @@ public class Tetris {
     private void MoveRight() {
         Piece tmpPiece = currentPiece.clone();
         tmpPiece.MoveRight();
+        if (!grid.checkCollision(tmpPiece)) {
+            currentPiece = tmpPiece;
+        }
+    }
+
+    private void Rotate() {
+        Piece tmpPiece = currentPiece.clone();
+        tmpPiece.Rotate();
         if (!grid.checkCollision(tmpPiece)) {
             currentPiece = tmpPiece;
         }

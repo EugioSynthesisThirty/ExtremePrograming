@@ -106,7 +106,7 @@ public class Fenetre extends JFrame
 	 * @param rect
 	 *            le rectangle dans lequel il dois être centré
 	 */
-	public static void drawCenteredString(Graphics g, String text, Rectangle rect)
+	public static void drawCenteredString(Graphics g, String text, final Rectangle rect)
 	{
 		Font font = g.getFont();
 		FontMetrics metrics = g.getFontMetrics(font);
