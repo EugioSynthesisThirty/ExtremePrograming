@@ -4,13 +4,20 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import formation.xp.event.Clavier;
+import formation.xp.game.grid.CaseGrid;
 import formation.xp.game.grid.Grid;
+import formation.xp.game.piece.Coord;
 import formation.xp.game.piece.Piece;
 
 public class Tetris {
+    private static final Coord SIZE_GRID = new Coord(10, 21);
+    private static final Coord POS_CURRENT = new Coord(5, 0);
+    private static final Coord POS_NEXT = new Coord(12, 8);
+    
     private Clavier clavier;
-    public Grid grid;
+    private Grid grid;
     private Piece currentPiece;
+    private Piece nextPiece;
     private ArrayList<Piece> pieces;
     
     private boolean timeInitialised;
@@ -19,9 +26,10 @@ public class Tetris {
 
     public Tetris() {
         clavier = null;
-        this.grid = new Grid(10, 21);
+        this.grid = new Grid(SIZE_GRID);
         pieces = new ArrayList<Piece>();
-        currentPiece = new Piece(5, 0);
+        currentPiece = new Piece(POS_CURRENT);
+        nextPiece = new Piece(POS_NEXT);
         
         timeInitialised = false;
         lastTimeDown = 0;
@@ -101,7 +109,9 @@ public class Tetris {
         }
         
     	pieces.add(currentPiece);
-    	currentPiece = new Piece(5, 0);
+    	currentPiece = nextPiece;
+    	currentPiece.setPosition(POS_CURRENT);
+    	nextPiece = new Piece(POS_NEXT);
         durationDown *= 0.98;
         return false;
     }
@@ -128,7 +138,23 @@ public class Tetris {
         return true;
     }
 
+    public Piece getNextPiece() {
+    	return nextPiece;
+    }
+    
     public void setClavier(Clavier clavier) {
         this.clavier = clavier;
+    }
+    
+    public int getWidth() {
+    	return grid.width;
+    }
+    
+    public int getHeight() {
+    	return grid.height;
+    }
+    
+    public CaseGrid getCase(int x, int y) {
+    	return grid.getCase(x, y);
     }
 }

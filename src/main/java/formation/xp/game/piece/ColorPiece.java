@@ -7,10 +7,10 @@ public enum ColorPiece {
     ORANGE(255, 127, 80),
     ORANGE_CLAIR(255, 191, 0),
     JAUNE(223, 255, 0),
-    KAKI(159, 226, 191),
-    CYAN(64, 224, 208),
-    BLEU(100, 149, 237),
-    VIOLET(204, 204, 255);
+    KAKI(87, 204, 142),
+    CYAN(28, 168, 154),
+    BLEU(38, 105, 230),
+    VIOLET(119, 73, 254);
 
     public final Color color;
 

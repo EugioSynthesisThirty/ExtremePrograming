@@ -6,7 +6,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class Piece implements Cloneable {
-	private static LinkedList<TypePiece> buffer = new LinkedList<TypePiece>();
+	private static LinkedList<TypePiece> bufferType = new LinkedList<TypePiece>();
+	private static LinkedList<ColorPiece> bufferColor = new LinkedList<ColorPiece>();
 	private static final int N_CYCLES = 2;
 	
     private Coord position;
@@ -18,18 +19,28 @@ public class Piece implements Cloneable {
         this.position = new Coord(x, y);
         this.rotation = 0;
 
-        int colorIndex = (int) (Math.random() * ColorPiece.values().length);
-        color = ColorPiece.values()[colorIndex];
-
-        if (buffer.size() == 0) {
+        if (bufferType.size() == 0) {
         	for (int i = 0; i < N_CYCLES; i++) {
-        		buffer.addAll(Arrays.asList(TypePiece.values()));
+        		bufferType.addAll(Arrays.asList(TypePiece.values()));
         	}
         	
-        	Collections.shuffle(buffer);
+        	Collections.shuffle(bufferType);
+        }
+
+        if (bufferColor.size() == 0) {
+        	for (int i = 0; i < N_CYCLES; i++) {
+        		bufferColor.addAll(Arrays.asList(ColorPiece.values()));
+        	}
+        	
+        	Collections.shuffle(bufferColor);
         }
         
-        this.typePiece = buffer.removeLast();
+        this.typePiece = bufferType.removeLast();
+        this.color = bufferColor.removeLast();
+    }
+    
+    public Piece(Coord pos) {
+    	this(pos.x, pos.y);
     }
 
     private Piece(final Piece piece) {
@@ -51,6 +62,14 @@ public class Piece implements Cloneable {
             absoluteCoords.add(new Coord(c.x + position.x, c.y + position.y));
         }
         return absoluteCoords;
+    }
+    
+    public void setPosition(Coord pos) {
+    	this.position = pos;
+    }
+    
+    public Coord getPosition() {
+    	return this.position;
     }
 
     public void MoveLeft() {

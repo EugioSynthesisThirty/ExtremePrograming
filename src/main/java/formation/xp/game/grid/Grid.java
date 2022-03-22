@@ -26,6 +26,10 @@ public class Grid {
 		}
 	}
 
+	public Grid(Coord size) {
+		this(size.x, size.y);
+	}
+
 	public CaseGrid getCase(int x, int y) {
 		return cases.get(y).get(x);
 	}
