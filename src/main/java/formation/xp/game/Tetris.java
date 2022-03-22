@@ -21,7 +21,7 @@ public class Tetris {
         clavier = null;
         this.grid = new Grid(10, 21);
         pieces = new ArrayList<Piece>();
-        currentPiece = new Piece(5, 1);
+        currentPiece = new Piece(5, 0);
         
         timeInitialised = false;
         lastTimeDown = 0;
@@ -101,7 +101,8 @@ public class Tetris {
         }
         
     	pieces.add(currentPiece);
-    	currentPiece = new Piece(5, 1);
+    	currentPiece = new Piece(5, 0);
+        durationDown *= 0.98;
         return false;
     }
 

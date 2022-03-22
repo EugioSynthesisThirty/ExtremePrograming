@@ -3,13 +3,13 @@ package formation.xp.game.piece;
 import java.util.ArrayList;
 
 public enum TypePiece {
-    I(new CoordFloat(0, 1.5f), new CoordFloat(0, 0.5f), new CoordFloat(0, -0.5f), new CoordFloat(0, -1.5f)), //bon
+    I(new CoordFloat(0, 1.5f), new CoordFloat(0, 0.5f), new CoordFloat(0, -0.5f), new CoordFloat(0, -1.5f)),
     J(new CoordFloat(1, 0.5f), new CoordFloat(1, -0.5f), new CoordFloat(0, -0.5f), new CoordFloat(-1, -0.5f)), 
-    L(new CoordFloat(-1, 0.5f), new CoordFloat(-1, -0.5f), new CoordFloat(0, -0.5f), new CoordFloat(1, -0.5f)), // bon
-    O(new CoordFloat(-0.5f, -0.5f), new CoordFloat(-0.5f, 0.5f), new CoordFloat(0.5f, 0.5f), new CoordFloat(0.5f, -0.5f)), //bon
+    L(new CoordFloat(-1, 0.5f), new CoordFloat(-1, -0.5f), new CoordFloat(0, -0.5f), new CoordFloat(1, -0.5f)),
+    O(new CoordFloat(-0.5f, -0.5f), new CoordFloat(-0.5f, 0.5f), new CoordFloat(0.5f, 0.5f), new CoordFloat(0.5f, -0.5f)),
     S(new CoordFloat(-1, 0.5f), new CoordFloat(0, 0.5f), new CoordFloat(0, -0.5f), new CoordFloat(1, -0.5f)),
-    T(new CoordFloat(-1, -0.5f), new CoordFloat(0, -0.5f), new CoordFloat(0, 0.5f), new CoordFloat(1, -0.5f)), //bon
-    Z(new CoordFloat(1, 0.5f), new CoordFloat(0, 0.5f), new CoordFloat(0, -0.5f), new CoordFloat(-1, -0.5f)); //bon
+    T(new CoordFloat(-1, -0.5f), new CoordFloat(0, -0.5f), new CoordFloat(0, 0.5f), new CoordFloat(1, -0.5f)),
+    Z(new CoordFloat(1, 0.5f), new CoordFloat(0, 0.5f), new CoordFloat(0, -0.5f), new CoordFloat(-1, -0.5f));
 
     public final ArrayList<CoordFloat> coords;
 

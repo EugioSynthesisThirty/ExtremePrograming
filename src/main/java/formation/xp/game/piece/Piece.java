@@ -1,8 +1,14 @@
 package formation.xp.game.piece;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 
 public class Piece implements Cloneable {
+	private static LinkedList<TypePiece> buffer = new LinkedList<TypePiece>();
+	private static final int N_CYCLES = 2;
+	
     private Coord position;
     private int rotation;
     public ColorPiece color;
@@ -15,9 +21,15 @@ public class Piece implements Cloneable {
         int colorIndex = (int) (Math.random() * ColorPiece.values().length);
         color = ColorPiece.values()[colorIndex];
 
-        int pieceIndex = (int) (Math.random() * TypePiece.values().length);
-        this.typePiece = TypePiece.values()[pieceIndex];
-        System.out.println("piece : " + typePiece.toString());
+        if (buffer.size() == 0) {
+        	for (int i = 0; i < N_CYCLES; i++) {
+        		buffer.addAll(Arrays.asList(TypePiece.values()));
+        	}
+        	
+        	Collections.shuffle(buffer);
+        }
+        
+        this.typePiece = buffer.removeLast();
     }
 
     private Piece(final Piece piece) {
