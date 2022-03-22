@@ -2,8 +2,10 @@ package formation.xp.fenetre;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
@@ -19,8 +21,7 @@ public class Panneau extends JPanel
 
 	private Tetris tetris;
 	private int width, height;
-	private Font font = new Font("times", Font.PLAIN, 30);
-	private boolean initialized = false;
+	private Font font = new Font("times", Font.PLAIN, 60);
 
 	public Panneau()
 	{
@@ -34,20 +35,8 @@ public class Panneau extends JPanel
 		this.tetris = tetris;
 	}
 
-	private void init(Graphics g)
-	{
-		if (initialized)
-			return;
-		
-		g.setFont(font);
-		g.getFontMetrics(font);
-		initialized = true;
-	}
-
 	public void paintComponent(Graphics g)
 	{
-		init(g);
-		
 		width = super.getWidth();
 		height = super.getHeight();
 
@@ -96,6 +85,62 @@ public class Panneau extends JPanel
 							lengthCase - margin, lengthCase - margin);
 				}
 			}
+
+			g.setFont(font);
+			g.setColor(new Color(0, 0, 0));
+			
+			drawTranslatedString(g, "" + tetris.getScore(),
+					offset_x + lengthCase * (tetris.getWidth() + 1),
+					offset_y,
+					0, 1);
 		}
+	}
+
+	/**
+	 * Ecrit un texte et réalise la translation désirée.
+	 * 
+	 * @param g
+	 *            la destination
+	 * @param text
+	 *            le texte à écrire
+	 * @param x
+	 *            les coordonnées initiales du texte
+	 * @param y
+	 *            les coordonnées initiales du texte
+	 * @param translate_x
+	 *            le taux de décalage du texte en abscisse
+	 * @param translate_y
+	 *            le taux de décalage du texte en ordonnée
+	 */
+	public static void drawTranslatedString(Graphics g, String text, int x, int y, double translate_x, double translate_y)
+	{
+		Font font = g.getFont();
+		long lastTemps = System.currentTimeMillis();
+		FontMetrics metrics = g.getFontMetrics(font);
+		int pos_x = x + (int) (metrics.stringWidth(text) * translate_x);
+		int pos_y = y + (int) (metrics.getHeight() * translate_y);
+		g.drawString(text, pos_x, pos_y);
+		long tempsActuel = System.currentTimeMillis();
+		if ((tempsActuel - lastTemps) > 100)
+			System.out.println("bug : " + (tempsActuel - lastTemps) + "ms");
+	}
+
+	/**
+	 * Ecrit un texte centré dans la zone désirée.
+	 * 
+	 * @param g
+	 *            la destination
+	 * @param text
+	 *            le texte à écrire
+	 * @param rect
+	 *            le rectangle dans lequel il dois être centré
+	 */
+	public static void drawCenteredString(Graphics g, String text, final Rectangle rect)
+	{
+		Font font = g.getFont();
+		FontMetrics metrics = g.getFontMetrics(font);
+		int x = (rect.width - metrics.stringWidth(text)) / 2;
+		int y = ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+		g.drawString(text, x + rect.x, y + rect.y);
 	}
 }

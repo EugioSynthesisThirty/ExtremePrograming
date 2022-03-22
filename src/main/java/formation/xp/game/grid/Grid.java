@@ -82,8 +82,31 @@ public class Grid {
 	
 	public int clearLines() {
 		int nLines = 0;
-		
-		//TODO
+
+		for (int y = 0; y < height; y++) {
+			boolean filled = true;
+			
+			for (int x = 0; x < width; x++) {
+				if (!this.getCase(x, y).filled) {
+					filled = false;
+					break;
+				}
+			}
+			
+			if (filled) {
+				nLines++;
+
+				for (int y2 = y; y2 > 0; y2--) {
+					for (int x2 = 0; x2 < width; x2++) {
+						setCase(x2, y2, getCase(x2, y2 - 1));
+					}
+				}
+
+				for (int x2 = 0; x2 < width; x2++) {
+					setCase(x2, 0, new CaseGrid());
+				}
+			}
+		}
 		
 		return nLines;
 	}

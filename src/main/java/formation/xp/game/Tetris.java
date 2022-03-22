@@ -163,6 +163,10 @@ public class Tetris {
     	return grid.height;
     }
     
+    public int getScore() {
+    	return score;
+    }
+    
     public CaseGrid getCase(int x, int y) {
     	return grid.getCase(x, y);
     }
