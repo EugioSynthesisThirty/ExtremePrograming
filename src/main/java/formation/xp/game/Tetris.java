@@ -112,7 +112,7 @@ public class Tetris {
     	currentPiece = nextPiece;
     	currentPiece.setPosition(POS_CURRENT);
     	nextPiece = new Piece(POS_NEXT);
-        durationDown *= 0.98;
+        durationDown *= 0.96;
         return false;
     }
 

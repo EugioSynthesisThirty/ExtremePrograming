@@ -77,7 +77,7 @@ public class Piece implements Cloneable {
     }
 
     public void MoveRight() {
-        this.position.x++;
+        this.position.x++; 
     }
     
     public void MoveDown() {

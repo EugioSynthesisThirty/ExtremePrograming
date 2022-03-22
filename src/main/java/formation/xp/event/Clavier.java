@@ -27,45 +27,41 @@ public class Clavier implements KeyListener
 
 	public void keyPressed(final KeyEvent k)
 	{
-		try
-		{
+		if (k.getKeyCode() < KeyEvent.KEY_LAST) {
 			if (!pressed[k.getKeyCode()])
 				typed[k.getKeyCode()] = true;
 			
 			pressed[k.getKeyCode()] = true;
 		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			System.exit(1);
-		}
 	}
 
 	public void keyReleased(final KeyEvent k)
 	{
-		try
-		{
+		if (k.getKeyCode() < KeyEvent.KEY_LAST) {
 			pressed[k.getKeyCode()] = false;
 		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			System.exit(1);
-		}
+		
 	}
 
 	public boolean isPressed(int k)
 	{
+		if (k >= KeyEvent.KEY_LAST)
+			return false;
+		
 		return pressed[k];
 	}
 
 	public void setPressed(int k, boolean pressed)
 	{
-		this.pressed[k] = pressed;
+		if (k < KeyEvent.KEY_LAST)
+			this.pressed[k] = pressed;
 	}
 
 	public boolean isTyped(int k, double time)
 	{
+		if (k >= KeyEvent.KEY_LAST)
+			return false;
+		
 		if (typed[k])
 		{
 			lastTimeTyped[k] = time - durationRepeat + durationNoRepeat;
