@@ -27,7 +27,7 @@ public class GridTest {
 	@Test
 	public void addOnePieceTest() {
 		Grid grid = new Grid(5, 4);
-		grid.update(new Piece(1, 1), false);
+		grid.pushPiece(new Piece(1, 1));
 
 		ArrayList<Coord> parts = new ArrayList<Coord>();
 		parts.add(new Coord(0, 1));
@@ -70,7 +70,7 @@ public class GridTest {
 		Piece fixedPiece = new Piece(1, 1);
 		Piece piece = new Piece(3, 1);
 
-		grid.update(fixedPiece, true);
+		grid.pushPiece(fixedPiece);
 		assertTrue(grid.checkCollision(piece));
 	}
 }

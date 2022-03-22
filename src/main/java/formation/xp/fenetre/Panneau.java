@@ -85,13 +85,16 @@ public class Panneau extends JPanel
 				}
 			}
 			
-			final Piece piece = tetris.getNextPiece();
-			g.setColor(piece.color.color);
+			Piece[] pieces = new Piece[]{tetris.getNextPiece(), tetris.getCurrentPiece()};
 			
-			for (final Coord pos : piece.getAbsoluteCoords()) {
-				g.fillRect(offset_x + lengthCase * pos.x + margin / 2,
-						offset_y + lengthCase * pos.y + margin / 2,
-						lengthCase - margin, lengthCase - margin);
+			for (final Piece piece : pieces) {
+				g.setColor(piece.color.color);
+				
+				for (final Coord pos : piece.getAbsoluteCoords()) {
+					g.fillRect(offset_x + lengthCase * pos.x + margin / 2,
+							offset_y + lengthCase * pos.y + margin / 2,
+							lengthCase - margin, lengthCase - margin);
+				}
 			}
 		}
 	}

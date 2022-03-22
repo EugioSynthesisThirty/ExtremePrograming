@@ -48,25 +48,20 @@ public class Grid {
 
 	public void clear() {
 		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++)
-				this.setCase(x, y, new CaseGrid());
+			for (int x = 0; x < width; x++) {
+				this.setCase(x, y, new CaseGrid());				
+			}
 		}
 	}
-
-	public void update(final ArrayList<Piece> pieces) {
-		for (Piece piece : pieces) {
-			this.update(piece, true);
-		}
-	}
-
+	
 	public boolean isInGrid(final Coord coord) {
 		return coord.x >= 0 && coord.x < width && coord.y >= 0 && coord.y < height;
 	}
-
-	public void update(final Piece piece, boolean fixed) {
+	
+	public void pushPiece(final Piece piece) {
 		for (Coord coord : piece.getAbsoluteCoords()) {
 			if (this.isInGrid(coord)) {
-				this.setCase(coord, new CaseGrid(true, fixed, piece.color));
+				this.setCase(coord, new CaseGrid(true, piece.color));
 			}
 		}
 	}
@@ -78,10 +73,18 @@ public class Grid {
 			}
 
 			CaseGrid caseGrid = this.getCase(coord);
-			if (caseGrid.filled && caseGrid.fixed) {
+			if (caseGrid.filled) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public int clearLines() {
+		int nLines = 0;
+		
+		//TODO
+		
+		return nLines;
 	}
 }

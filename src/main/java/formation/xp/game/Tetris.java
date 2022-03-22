@@ -1,7 +1,6 @@
 package formation.xp.game;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import formation.xp.event.Clavier;
 import formation.xp.game.grid.CaseGrid;
@@ -15,19 +14,21 @@ public class Tetris {
     private static final Coord POS_NEXT = new Coord(12, 8);
     
     private Clavier clavier;
+    
     private Grid grid;
+    
     private Piece currentPiece;
     private Piece nextPiece;
-    private ArrayList<Piece> pieces;
     
     private boolean timeInitialised;
     private double lastTimeDown;
     private double durationDown;
 
+    int score;
+
     public Tetris() {
         clavier = null;
         this.grid = new Grid(SIZE_GRID);
-        pieces = new ArrayList<Piece>();
         currentPiece = new Piece(POS_CURRENT);
         nextPiece = new Piece(POS_NEXT);
         
@@ -35,9 +36,7 @@ public class Tetris {
         lastTimeDown = 0;
         durationDown = 1000;
 
-        grid.clear();
-        grid.update(pieces);
-        grid.update(currentPiece, false);
+        score = 0;
     }
 
     public void update(double time) {
@@ -55,9 +54,6 @@ public class Tetris {
         	lastTimeDown = time;
         }
 
-        grid.clear();
-        grid.update(pieces);
-        grid.update(currentPiece, false);
     }
     
     private void updateKeys(double time) {
@@ -108,7 +104,8 @@ public class Tetris {
             return true;
         }
         
-    	pieces.add(currentPiece);
+        grid.pushPiece(currentPiece);
+        clearLines();
     	currentPiece = nextPiece;
     	currentPiece.setPosition(POS_CURRENT);
     	nextPiece = new Piece(POS_NEXT);
@@ -136,6 +133,18 @@ public class Tetris {
 
         currentPiece = tmpPiece;
         return true;
+    }
+    
+    private void clearLines()
+    {
+    	int nLines = grid.clearLines();
+    	
+    	if (nLines > 0)
+    		score += 100 * Math.pow(2, nLines - 1);
+    }
+
+    public Piece getCurrentPiece() {
+    	return currentPiece;
     }
 
     public Piece getNextPiece() {
