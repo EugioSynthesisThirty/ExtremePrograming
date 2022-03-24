@@ -81,7 +81,8 @@ public class Grid {
 	}
 	
 	public int clearLines() {
-		int nLines = 0;
+		int score = 0;
+		int scoreParLigne = 100;
 
 		for (int y = 0; y < height; y++) {
 			boolean filled = true;
@@ -94,7 +95,8 @@ public class Grid {
 			}
 			
 			if (filled) {
-				nLines++;
+				score += scoreParLigne;
+				scoreParLigne *= 2;
 
 				for (int y2 = y; y2 > 0; y2--) {
 					for (int x2 = 0; x2 < width; x2++) {
@@ -108,6 +110,6 @@ public class Grid {
 			}
 		}
 		
-		return nLines;
+		return score;
 	}
 }

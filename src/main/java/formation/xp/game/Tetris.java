@@ -24,7 +24,9 @@ public class Tetris {
     private double lastTimeDown;
     private double durationDown;
 
-    int score;
+    private int score;
+    
+    //private boolean gameOver;
 
     public Tetris() {
         clavier = null;
@@ -35,6 +37,7 @@ public class Tetris {
         timeInitialised = false;
         lastTimeDown = 0;
         durationDown = 1000;
+        //gameOver = false;
 
         score = 0;
     }
@@ -105,11 +108,15 @@ public class Tetris {
         }
         
         grid.pushPiece(currentPiece);
-        clearLines();
+        score += grid.clearLines();
     	currentPiece = nextPiece;
     	currentPiece.setPosition(POS_CURRENT);
     	nextPiece = new Piece(POS_NEXT);
         durationDown *= 0.96;
+        
+        /*if (grid.checkCollision(currentPiece))
+        	gameOver = true;*/
+        
         return false;
     }
 
@@ -133,14 +140,6 @@ public class Tetris {
 
         currentPiece = tmpPiece;
         return true;
-    }
-    
-    private void clearLines()
-    {
-    	int nLines = grid.clearLines();
-    	
-    	if (nLines > 0)
-    		score += 100 * Math.pow(2, nLines - 1);
     }
 
     public Piece getCurrentPiece() {

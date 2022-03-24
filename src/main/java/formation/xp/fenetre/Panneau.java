@@ -37,6 +37,9 @@ public class Panneau extends JPanel
 
 	public void paintComponent(Graphics g)
 	{
+		if (this.tetris == null)
+			return;
+		
 		width = super.getWidth();
 		height = super.getHeight();
 
@@ -56,44 +59,42 @@ public class Panneau extends JPanel
 		g.setColor(new Color(196, 196, 196));
 		g.fillRect(0, 0, width, height);
 		
-		if (this.tetris != null) {
-			for (int x = 0; x < tetris.getWidth(); x++) {
-				for (int y = 0; y < tetris.getHeight(); y++) {
-					final CaseGrid c = tetris.getCase(x, y);
-					
-					if (c.filled) {
-						g.setColor(c.color.color);
-					}
-					else {
-						g.setColor(new Color(255, 255, 255));
-					}
-
-					g.fillRect(offset_x + lengthCase * x + margin / 2,
-							offset_y + lengthCase * y + margin / 2,
-							lengthCase - margin, lengthCase - margin);
-				}
-			}
-			
-			Piece[] pieces = new Piece[]{tetris.getNextPiece(), tetris.getCurrentPiece()};
-			
-			for (final Piece piece : pieces) {
-				g.setColor(piece.color.color);
+		for (int x = 0; x < tetris.getWidth(); x++) {
+			for (int y = 0; y < tetris.getHeight(); y++) {
+				final CaseGrid c = tetris.getCase(x, y);
 				
-				for (final Coord pos : piece.getAbsoluteCoords()) {
-					g.fillRect(offset_x + lengthCase * pos.x + margin / 2,
-							offset_y + lengthCase * pos.y + margin / 2,
-							lengthCase - margin, lengthCase - margin);
+				if (c.filled) {
+					g.setColor(c.color.color);
 				}
-			}
+				else {
+					g.setColor(new Color(255, 255, 255));
+				}
 
-			g.setFont(font);
-			g.setColor(new Color(0, 0, 0));
-			
-			drawTranslatedString(g, "" + tetris.getScore(),
-					offset_x + lengthCase * (tetris.getWidth() + 1),
-					offset_y,
-					0, 1);
+				g.fillRect(offset_x + lengthCase * x + margin / 2,
+						offset_y + lengthCase * y + margin / 2,
+						lengthCase - margin, lengthCase - margin);
+			}
 		}
+		
+		Piece[] pieces = new Piece[]{tetris.getNextPiece(), tetris.getCurrentPiece()};
+		
+		for (final Piece piece : pieces) {
+			g.setColor(piece.color.color);
+			
+			for (final Coord pos : piece.getAbsoluteCoords()) {
+				g.fillRect(offset_x + lengthCase * pos.x + margin / 2,
+						offset_y + lengthCase * pos.y + margin / 2,
+						lengthCase - margin, lengthCase - margin);
+			}
+		}
+
+		g.setFont(font);
+		g.setColor(new Color(0, 0, 0));
+		
+		drawTranslatedString(g, "" + tetris.getScore(),
+				offset_x + lengthCase * (tetris.getWidth() + 1),
+				offset_y,
+				0, 1);
 	}
 
 	/**
@@ -115,14 +116,10 @@ public class Panneau extends JPanel
 	public static void drawTranslatedString(Graphics g, String text, int x, int y, double translate_x, double translate_y)
 	{
 		Font font = g.getFont();
-		long lastTemps = System.currentTimeMillis();
 		FontMetrics metrics = g.getFontMetrics(font);
 		int pos_x = x + (int) (metrics.stringWidth(text) * translate_x);
 		int pos_y = y + (int) (metrics.getHeight() * translate_y);
 		g.drawString(text, pos_x, pos_y);
-		long tempsActuel = System.currentTimeMillis();
-		if ((tempsActuel - lastTemps) > 100)
-			System.out.println("bug : " + (tempsActuel - lastTemps) + "ms");
 	}
 
 	/**
