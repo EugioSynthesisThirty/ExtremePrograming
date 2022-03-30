@@ -68,9 +68,12 @@ public class Grid {
 
 	public boolean checkCollision(final Piece piece) {
 		for (Coord coord : piece.getAbsoluteCoords()) {
-			if (!this.isInGrid(coord)) {
+			if (coord.x < 0 || coord.x >= width || coord.y >= height) {
 				return true;
 			}
+			
+			if (coord.y < 0)
+				continue;
 
 			CaseGrid caseGrid = this.getCase(coord);
 			if (caseGrid.filled) {

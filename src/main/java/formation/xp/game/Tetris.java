@@ -26,7 +26,7 @@ public class Tetris {
 
     private int score;
     
-    //private boolean gameOver;
+    private boolean gameOver;
 
     public Tetris() {
         clavier = null;
@@ -37,22 +37,23 @@ public class Tetris {
         timeInitialised = false;
         lastTimeDown = 0;
         durationDown = 1000;
-        //gameOver = false;
+        gameOver = false;
 
         score = 0;
     }
 
     public void update(double time) {
-        if (!timeInitialised)
-        {
+    	if (gameOver)
+    		return;
+    	
+        if (!timeInitialised) {
         	lastTimeDown = time;
         	timeInitialised = true;
         }
         
         updateKeys(time);
         
-        if (time - lastTimeDown >= durationDown)
-        {
+        if (time - lastTimeDown >= durationDown) {
         	MoveDown();
         	lastTimeDown = time;
         }
@@ -114,8 +115,18 @@ public class Tetris {
     	nextPiece = new Piece(POS_NEXT);
         durationDown *= 0.96;
         
-        /*if (grid.checkCollision(currentPiece))
-        	gameOver = true;*/
+        if (grid.checkCollision(currentPiece))
+        {
+        	gameOver = true;
+        	Coord pos = currentPiece.getPosition();
+        	
+        	do
+        	{
+        		pos.y--;
+        		currentPiece.setPosition(pos);
+        	}
+        	while (grid.checkCollision(currentPiece));
+        }
         
         return false;
     }
@@ -168,5 +179,9 @@ public class Tetris {
     
     public CaseGrid getCase(int x, int y) {
     	return grid.getCase(x, y);
+    }
+    
+    public boolean isGameOver() {
+    	return gameOver;
     }
 }

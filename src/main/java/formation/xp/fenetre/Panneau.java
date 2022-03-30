@@ -22,6 +22,7 @@ public class Panneau extends JPanel
 	private Tetris tetris;
 	private int width, height;
 	private Font font = new Font("times", Font.PLAIN, 60);
+	private Font largeFont = new Font("times", Font.PLAIN, 150);
 
 	public Panneau()
 	{
@@ -95,6 +96,13 @@ public class Panneau extends JPanel
 				offset_x + lengthCase * (tetris.getWidth() + 1),
 				offset_y,
 				0, 1);
+		
+		if (tetris.isGameOver())
+		{
+			g.setFont(largeFont);
+			g.setColor(new Color(0, 0, 0));
+			drawCenteredString(g, "Game Over", getVisibleRect());
+		}
 	}
 
 	/**
